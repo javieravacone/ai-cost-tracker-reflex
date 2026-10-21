@@ -41,8 +41,8 @@ New features, auth/SSO, deployment, SQL Server (later), deleting or changing the
 | ID | Task | Route | Status |
 |----|------|-------|--------|
 | R0 | Scaffold, venv, Reflex init + compile check, DB copy, types contract | inline | [x] |
-| R1 | Core domain: db (schema v3 + all queries), attribution, cost, links, format, markdown, report (index, people, skills) + ported tests | delegated (writer) | [ ] |
-| R2 | Integrations: LangSmith client/map/content, GitHub client/parse, db content layer, sync (+ CLI scripts) + ported tests | delegated (writer, parallel with R1) | [ ] |
+| R1 | Core domain: db (schema v3 + all queries), attribution, cost, links, format, markdown, report (index, people, skills) + ported tests | delegated (writer) | [x] |
+| R2 | Integrations: LangSmith client/map/content, GitHub client/parse, db content layer, sync (+ CLI scripts) + ported tests | delegated (writer, parallel with R1) | [x] |
 | R3 | Reflex UI: shell, design system, all pages, Sync button, manual assignment, transcript | delegated (writer, after R1+R2) | [ ] |
 | R4 | Parity check: side-by-side screenshots and route/feature checklist vs Next app; fix gaps | delegated + inline | [ ] |
 
@@ -54,5 +54,9 @@ the same links and the same look (screenshots side by side). Ported tests green.
 - R0: Reflex 0.10.0 installed; compile OK. DB copied with VACUUM INTO (user_version 3,
   langsmith:21 seed:3000, turn_content 21, turn_events 117). Plain file copy lost WAL changes.
 
+- R1 (5aa05a2, d30d2b2, d32df70): bis_core db/attribution/cost/report/links/markdown/app_data; 276 core tests; parity with TS on a DB copy for 7/30/90/all windows (e.g. 30d: 1,344 turns, 18,334 credits, $205.08 API, $330.43 subscription, 76.7% with issue) with a gzipped TS reference fixture.
+- R2 (efdf8dc): LangSmith/GitHub clients, map, content, db content, sync, CLI scripts; 79 integration tests; real --full sync on a copy produced rows byte-identical to the Next app (21 turns, 21 content, 117 events, 3 skills). `app.lastSync` keeps the TS camelCase shape so both apps share state.
+- Full suite: 355 passed.
+
 ## Next step
-Launch R1 and R2 in parallel.
+R3 Reflex UI.
