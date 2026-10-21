@@ -43,6 +43,17 @@ def _sync_blocking() -> SyncOutcome:
         db.close()
 
 
+async def perform_sync() -> tuple[dict[str, Any], bool]:
+    """Runs the full sync off the event loop; returns the toast and whether to reload the page
+    (only after a finished sync, like the Next app's router.refresh())."""
+    try:
+        outcome = await asyncio.to_thread(_sync_blocking)
+    except Exception:  # noqa: BLE001 - shown as "Sync failed" like the Next app
+        log.exception("sync failed")
+        return toast_view(None, error=True), False
+    return toast_view(outcome), outcome.status == "done"
+
+
 class AppState(rx.State):
     """Shell data shared by every page."""
 
@@ -106,13 +117,7 @@ class AppState(rx.State):
                 return
             self.syncing = True
             self.toast = EMPTY_TOAST
-        outcome: SyncOutcome | None = None
-        try:
-            outcome = await asyncio.to_thread(_sync_blocking)
-            toast = toast_view(outcome)
-        except Exception:  # noqa: BLE001 - shown as "Sync failed" like the Next app
-            log.exception("sync failed")
-            toast = toast_view(None, error=True)
+        toast, reload = await perform_sync()
         async with self:
             self.syncing = False
             self.toast = toast
@@ -120,7 +125,7 @@ class AppState(rx.State):
             mine = self.toast_id
             self.last_sync = last_sync_view()
             self.source = source_status()
-        if outcome is not None and outcome.status == "done":
+        if reload:
             yield AppState.reload_current
         await asyncio.sleep(TOAST_MS / 1000)
         async with self:
