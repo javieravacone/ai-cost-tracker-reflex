@@ -1,36 +1,31 @@
-"""Welcome to Reflex! This file outlines the steps to create a basic app."""
+"""BIS AI Cost Tracker (Reflex port of the Next.js POC): app, theme and routes."""
 
 import reflex as rx
 
-from rxconfig import config
+from bis_core.sync import load_local_env
+
+from bis_cost_tracker.pages import overview, team, teams
+
+# Same variables as the Next app (`.env.local`: LangSmith / GitHub / DB_PATH).
+load_local_env()
+
+TITLE = "BIS AI Cost Tracker"
 
 
-class State(rx.State):
-    """The app state."""
+def _title(section: str | None) -> str:
+    return f"{section} · {TITLE}" if section else TITLE
 
 
-def index() -> rx.Component:
-    # Welcome Page (Index)
-    return rx.container(
-        rx.color_mode.button(position="top-right"),
-        rx.vstack(
-            rx.heading("Welcome to Reflex!", size="9"),
-            rx.text(
-                "Get started by editing ",
-                rx.code(f"{config.app_name}/{config.app_name}.py"),
-                size="5",
-            ),
-            rx.link(
-                rx.button("Check out our docs!"),
-                href="https://reflex.dev/docs/getting-started/introduction/",
-                is_external=True,
-            ),
-            spacing="5",
-            justify="center",
-            min_height="85vh",
-        ),
-    )
+app = rx.App(
+    stylesheets=["/styles.css"],
+    head_components=[
+        rx.el.meta(name="theme-color", media="(prefers-color-scheme: light)", content="#f5f5f7"),
+        rx.el.meta(name="theme-color", media="(prefers-color-scheme: dark)", content="#000000"),
+    ],
+)
 
+DESCRIPTION = "Copilot Chat usage and cost attribution by team, project, issue and PR."
 
-app = rx.App()
-app.add_page(index)
+app.add_page(overview.page, route="/", title=_title(None), description=DESCRIPTION, on_load=overview.OverviewState.load)
+app.add_page(team.page, route="/equipos/[id]", title=_title("Team"), on_load=team.TeamState.load)
+app.add_page(teams.page, route="/equipos", title=_title("Teams"), on_load=teams.TeamsState.load)
