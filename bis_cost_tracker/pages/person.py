@@ -7,7 +7,7 @@ from typing import Any
 import reflex as rx
 
 from bis_cost_tracker.components.layout import shell
-from bis_cost_tracker.components.rich import L, inline, seg
+from bis_cost_tracker.components.rich import D, L, inline, seg
 from bis_cost_tracker.components.ui import (
     LINK,
     bar_list,
@@ -50,6 +50,7 @@ SESSION_COLS = [("Last activity", False, ""), ("Repo and branches", False, ""), 
 
 
 def _seat(s: Any) -> rx.Component:
+    s = D(s)
     return rx.el.div(
         rx.el.div(
             rx.el.span("Seat · ", rx.el.span(s["month"], class_name="inline-block"), class_name="font-medium text-label-2"),

@@ -1,4 +1,12 @@
+import os
+from pathlib import Path
+
 import reflex as rx
+
+# SQLite (WAL mode) touches data/app.db-wal and -shm on every read; Reflex's dev hot reload does
+# not ignore those extensions, so watching data/ would restart the backend on each page view.
+if Path("data").is_dir():
+    os.environ.setdefault("REFLEX_HOT_RELOAD_EXCLUDE_PATHS", "data")
 
 # Semantic colour tokens from the Next app's `@theme inline` block, mapped to the CSS variables
 # defined in assets/styles.css (light and dark values switch there via prefers-color-scheme).
