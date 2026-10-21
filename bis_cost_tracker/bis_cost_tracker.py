@@ -4,7 +4,7 @@ import reflex as rx
 
 from bis_core.sync import load_local_env
 
-from bis_cost_tracker.pages import overview, people, person, projects, sessions, team, teams
+from bis_cost_tracker.pages import issues, overview, people, person, projects, sessions, team, teams
 
 # Same variables as the Next app (`.env.local`: LangSmith / GitHub / DB_PATH).
 load_local_env()
@@ -33,3 +33,5 @@ app.add_page(projects.page, route="/proyectos", title=_title("Projects"), on_loa
 app.add_page(person.page, route="/personas/[user]", title=_title("Person"), on_load=person.PersonState.load)
 app.add_page(people.page, route="/personas", title=_title("People"), on_load=people.PeopleState.load)
 app.add_page(sessions.page, route="/sesiones", title=_title("Sessions"), on_load=sessions.SessionsState.load)
+app.add_page(issues.issues_page, route="/issues", title=_title("Issues"), on_load=issues.IssuesState.load)
+app.add_page(issues.prs_page, route="/prs", title=_title("Pull requests"), on_load=issues.PrsState.load)
