@@ -7,7 +7,7 @@ from typing import Any
 
 from bis_core._js import now_ms
 from bis_core.app_data import href_with, langsmith_ref
-from bis_core.db import get_db, list_turns
+from bis_core.db import get_db, list_members, list_teams, list_turns
 from bis_core.links import langsmith_project_url
 from bis_core.report import DAY_OPTIONS, DEFAULT_DAYS, parse_days
 from bis_core.report.format import format_int
@@ -101,3 +101,24 @@ def toast_view(outcome: SyncOutcome | None, error: bool = False) -> dict[str, An
 
 
 EMPTY_TOAST: dict[str, Any] = {"show": False, "lead": "", "lines": [], "tone": ""}
+
+
+APP_TITLE = "BIS AI Cost Tracker"
+
+
+def team_title(team_id: str) -> str:
+    """Document title of /equipos/[id] (Next `generateMetadata`)."""
+    team = next((t for t in list_teams(get_db()) if t.id == team_id), None)
+    return f"{team.name} · Teams · {APP_TITLE}" if team else f"Team · {APP_TITLE}"
+
+
+def person_title(user: str) -> str:
+    """Document title of /personas/[user]: member display name, else the raw user name."""
+    m = next((x for x in list_members(get_db()) if x.user_name.lower() == user.lower()), None)
+    return f"{m.display_name if m else user} · People · {APP_TITLE}"
+
+
+def set_title_script(title: str) -> str:
+    import json
+
+    return f"document.title = {json.dumps(title)}"

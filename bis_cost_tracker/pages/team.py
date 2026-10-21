@@ -21,6 +21,7 @@ from bis_cost_tracker.components.ui import (
     stat,
 )
 from bis_cost_tracker.state import AppState
+from bis_cost_tracker.views.shell import team_title, set_title_script
 from bis_cost_tracker.views import team
 
 
@@ -37,6 +38,8 @@ class TeamState(AppState):
     def load(self):
         self._shell("TeamState")
         self._build()
+        # Dynamic document title, like the Next app's generateMetadata.
+        return rx.call_script(set_title_script(team_title(self._segment(1))))
 
 
 MEMBER_COLS = [

@@ -26,6 +26,7 @@ from bis_cost_tracker.components.ui import (
 )
 from bis_cost_tracker.pages.team import hero_value
 from bis_cost_tracker.state import AppState
+from bis_cost_tracker.views.shell import person_title, set_title_script
 from bis_cost_tracker.views import person
 
 
@@ -42,6 +43,8 @@ class PersonState(AppState):
     def load(self):
         self._shell("PersonState")
         self._build()
+        # Dynamic document title, like the Next app's generateMetadata.
+        return rx.call_script(set_title_script(person_title(self._segment(1))))
 
 
 PROJECT_COLS = [("Project", False, ""), ("AI credits", True, ""), ("Share", True, ""), ("Tokens", True, ""), ("Turns", True, "")]
