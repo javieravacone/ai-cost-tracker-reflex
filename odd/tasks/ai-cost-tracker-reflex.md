@@ -43,8 +43,8 @@ New features, auth/SSO, deployment, SQL Server (later), deleting or changing the
 | R0 | Scaffold, venv, Reflex init + compile check, DB copy, types contract | inline | [x] |
 | R1 | Core domain: db (schema v3 + all queries), attribution, cost, links, format, markdown, report (index, people, skills) + ported tests | delegated (writer) | [x] |
 | R2 | Integrations: LangSmith client/map/content, GitHub client/parse, db content layer, sync (+ CLI scripts) + ported tests | delegated (writer, parallel with R1) | [x] |
-| R3 | Reflex UI: shell, design system, all pages, Sync button, manual assignment, transcript | delegated (writer, after R1+R2) | [ ] |
-| R4 | Parity check: side-by-side screenshots and route/feature checklist vs Next app; fix gaps | delegated + inline | [ ] |
+| R3 | Reflex UI: shell, design system, all pages, Sync button, manual assignment, transcript | delegated (writer, after R1+R2) | [x] |
+| R4 | Parity check: side-by-side screenshots and route/feature checklist vs Next app; fix gaps | delegated + inline | [x] |
 
 ## Acceptance
 Every page of the Next app exists in Reflex with the same numbers for the same DB and period,
@@ -58,5 +58,10 @@ the same links and the same look (screenshots side by side). Ported tests green.
 - R2 (efdf8dc): LangSmith/GitHub clients, map, content, db content, sync, CLI scripts; 79 integration tests; real --full sync on a copy produced rows byte-identical to the Next app (21 turns, 21 content, 117 events, 3 skills). `app.lastSync` keeps the TS camelCase shape so both apps share state.
 - Full suite: 355 passed.
 
+- R3 (283cda5 … 7f94275): first run interrupted, partial work committed (283cda5), second run finished all routes. views/ = pure data builders, pages/ = Reflex components + per-page State, components/ = shell + kit, assets/styles.css = ported tokens. rxconfig excludes data/ from hot reload (SQLite WAL changes were restarting the backend). 375 tests.
+- R4: headless screenshots of all 12 pages + 404, expanded rows, ?turn=, dark mode compared with the Next app at 1440x1000: same numbers, copy and layout (0 or 1-px pixel diffs on most pages). Manual assignment verified (save, error). Screenshots /tmp/opencode/rx/ vs /tmp/opencode/ref/.
+- Known differences: "Last synced" label computed on load (Next refreshes every 30 s, server time zone); unknown routes return 200 in dev; markdown link with bold text splits into adjacent links; expanded rows survive client-side period change. Sync spinner/toast not seen live (logic unit-tested with stubbed run_full_sync).
+- Size: Python core 7,283 lines vs TS lib 5,303; Reflex UI 6,445 + 488 CSS vs Next UI 6,428; tests 4,899.
+
 ## Next step
-R3 Reflex UI.
+User decision: push to a GitHub repo, SQL Server backend, or packaging for the BIS (npm/bun build inside BIS network is the main open risk).
