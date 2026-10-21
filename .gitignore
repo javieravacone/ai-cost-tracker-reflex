@@ -1,0 +1,12 @@
+.web
+*.py[cod]
+__pycache__/
+*.db
+assets/external/
+.states
+
+# local
+.venv/
+data/
+.env*
+!.env.example
