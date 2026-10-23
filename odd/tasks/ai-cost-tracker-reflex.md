@@ -63,5 +63,8 @@ the same links and the same look (screenshots side by side). Ported tests green.
 - Known differences: "Last synced" label computed on load (Next refreshes every 30 s, server time zone); unknown routes return 200 in dev; markdown link with bold text splits into adjacent links; expanded rows survive client-side period change. Sync spinner/toast not seen live (logic unit-tested with stubbed run_full_sync).
 - Size: Python core 7,283 lines vs TS lib 5,303; Reflex UI 6,445 + 488 CSS vs Next UI 6,428; tests 4,899.
 
+- Published (2026-10-21): private repo https://github.com/javieravacone/ai-cost-tracker-reflex; main @ 6207169 (scaffold), feat/port @ 7ad2cf8; PR #1 feat/port → main open. Secret scan clean; .env.local and data/ ignored. The gzipped parity fixture contains local file paths (/home/<user>/…) from captured transcripts — kept (private repo; sanitizing would break the parity test against the real DB).
+- Storage decision: stay on SQLite (user, 2026-10-21).
+
 ## Next step
 User decision: push to a GitHub repo, SQL Server backend, or packaging for the BIS (npm/bun build inside BIS network is the main open risk).
