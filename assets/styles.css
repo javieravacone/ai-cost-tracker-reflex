@@ -1,0 +1,488 @@
+/*
+ * Design tokens and materials, ported from the Next app's src/app/globals.css.
+ *
+ * Tailwind v4 runs through Reflex's TailwindV4Plugin with a JS config (rxconfig.py), so the
+ * `@theme inline` block of the original lives there as `theme.extend` (colors, fonts, shadows
+ * mapped to these CSS variables). Everything else is plain CSS, unlayered like the original.
+ */
+:root {
+  color-scheme: light dark;
+
+  --bg: #f5f5f7;
+  --surface: #ffffff;
+  --surface-2: #fbfbfd;
+  --label: #1d1d1f;
+  --label-2: rgb(60 60 67 / 0.72);
+  --label-3: rgb(60 60 67 / 0.46);
+  --separator: rgb(60 60 67 / 0.14);
+  --separator-strong: rgb(60 60 67 / 0.24);
+  --fill: rgb(120 120 128 / 0.12);
+  --fill-2: rgb(120 120 128 / 0.2);
+  --hover: rgb(120 120 128 / 0.07);
+  --material: rgb(246 246 248 / 0.78);
+  --card-edge: rgb(0 0 0 / 0.05);
+  --shadow-a: rgb(0 0 0 / 0.04);
+  --shadow-b: rgb(0 0 0 / 0.08);
+
+  /* BIS corporate red (bis.org: #aa322f); AA contrast on white ~ 6.3:1. */
+  --accent: #aa322f;
+  --accent-hover: #952a27;
+  --link: #a02f2c;
+
+  --sys-green: #28a745;
+  --sys-green-text: #1e7f37;
+  --sys-orange: #f58300;
+  --sys-orange-text: #b35c00;
+  --sys-red: #ff3b30;
+  --sys-red-text: #d70015;
+  --sys-indigo: #5856d6;
+  --sys-purple: #af52de;
+  --sys-teal: #30b0c7;
+  --sys-gray: #8e8e93;
+  --sys-blue-text: #0058b0;
+
+  --seg-thumb: #ffffff;
+
+  --glass: rgb(255 255 255 / 0.6);
+  --glass-strong: rgb(255 255 255 / 0.74);
+  --glass-highlight: rgb(255 255 255 / 0.85);
+  --glass-edge: rgb(0 0 0 / 0.06);
+  --glass-shadow: 0 1px 1px rgb(0 0 0 / 0.02), 0 18px 40px -24px rgb(70 20 18 / 0.2);
+
+  --amb-1: rgb(170 50 47 / 0.09);
+  --amb-2: rgb(99 61 131 / 0.06);
+  --amb-3: rgb(58 107 172 / 0.06);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 150ms;
+  --dur-2: 260ms;
+  --dur-3: 420ms;
+
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --font-display:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter Display", "Inter", system-ui, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+  --shadow-card: 0 0 0 1px var(--card-edge), 0 1px 2px var(--shadow-a), 0 20px 44px -30px var(--shadow-b);
+  --shadow-glass: inset 0 1px 0 var(--glass-highlight), 0 0 0 1px var(--glass-edge), var(--glass-shadow);
+  --shadow-control: 0 0 0 0.5px rgb(0 0 0 / 0.06), 0 1px 2px rgb(0 0 0 / 0.12), 0 2px 6px rgb(0 0 0 / 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --surface: #1c1c1e;
+    --surface-2: #232325;
+    --label: #f5f5f7;
+    --label-2: rgb(235 235 245 / 0.68);
+    --label-3: rgb(235 235 245 / 0.4);
+    --separator: rgb(84 84 88 / 0.5);
+    --separator-strong: rgb(84 84 88 / 0.8);
+    --fill: rgb(120 120 128 / 0.24);
+    --fill-2: rgb(120 120 128 / 0.32);
+    --hover: rgb(120 120 128 / 0.14);
+    --material: rgb(28 28 30 / 0.78);
+    --card-edge: rgb(255 255 255 / 0.07);
+    --shadow-a: rgb(0 0 0 / 0.3);
+    --shadow-b: rgb(0 0 0 / 0.4);
+
+    --accent: #d9534e;
+    --accent-hover: #e46a65;
+    --link: #f07d78;
+
+    --sys-green: #30d158;
+    --sys-green-text: #30d158;
+    --sys-orange: #ff9f0a;
+    --sys-orange-text: #ffb340;
+    --sys-red: #ff453a;
+    --sys-red-text: #ff6961;
+    --sys-indigo: #6e6cf0;
+    --sys-purple: #bf5af2;
+    --sys-teal: #40c8e0;
+    --sys-gray: #98989d;
+    --sys-blue-text: #64b5ff;
+
+    --seg-thumb: rgb(99 99 102 / 0.85);
+    --glass: rgb(28 28 30 / 0.55);
+    --glass-strong: rgb(36 36 40 / 0.66);
+    --glass-highlight: rgb(255 255 255 / 0.08);
+    --glass-edge: rgb(255 255 255 / 0.08);
+    --glass-shadow: 0 1px 1px rgb(0 0 0 / 0.3), 0 24px 48px -24px rgb(0 0 0 / 0.7);
+
+    --amb-1: rgb(217 83 78 / 0.15);
+    --amb-2: rgb(140 100 180 / 0.1);
+    --amb-3: rgb(90 140 210 / 0.07);
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.006em;
+  background: var(--bg);
+  color: var(--label);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss01";
+}
+
+/* Radix Themes wraps the app: keep its tokens but never let it restyle the page. */
+.radix-themes {
+  --default-font-family: var(--font-sans);
+  --heading-font-family: var(--font-display);
+  --code-font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.006em;
+  color: var(--label);
+  background: transparent;
+}
+
+/* Ambient light: three soft radial blobs fixed behind everything (decorative, no layout). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(56rem 36rem at 18% -8%, var(--amb-1), transparent 62%),
+    radial-gradient(44rem 32rem at 100% 4%, var(--amb-2), transparent 64%),
+    radial-gradient(60rem 40rem at 62% 112%, var(--amb-3), transparent 62%);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+input,
+select,
+textarea {
+  accent-color: var(--accent);
+}
+
+/* --- materials -------------------------------------------------------------------------- */
+
+.glass {
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(180%);
+  box-shadow: var(--shadow-glass);
+}
+.glass-strong {
+  background: var(--glass-strong);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(180%);
+}
+.glass-hero {
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 55%),
+    radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, var(--sys-purple) 7%, transparent), transparent 60%),
+    var(--glass-strong);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(30px) saturate(180%);
+  box-shadow: var(--shadow-glass);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .glass-strong,
+  .glass-hero {
+    background: var(--surface);
+  }
+}
+
+/* --- charts --------------------------------------------------------------------------------- */
+
+.chart .slot .mark {
+  transition: opacity var(--dur-1) ease;
+}
+.chart:hover .slot .mark {
+  opacity: 0.4;
+}
+.chart .slot:hover .mark {
+  opacity: 1;
+}
+.chart .slot:hover .hit {
+  fill: var(--hover);
+}
+
+/* --- disclosure ------------------------------------------------------------------------------ */
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+.chevron {
+  transition: transform var(--dur-2) var(--ease-out);
+}
+details[open] > summary .chevron {
+  transform: rotate(90deg);
+}
+
+/* "Show" / "Hide" label of the warnings row (group-open variant of the original). */
+details[open] > summary .when-closed {
+  display: none;
+}
+details:not([open]) > summary .when-open {
+  display: none;
+}
+
+.scroll-area {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fill-2) transparent;
+}
+
+.skeleton {
+  background: var(--fill);
+}
+
+/* --- tables (the original expressed these as arbitrary variants on <table>) ------------------ */
+
+.dtable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13.5px;
+}
+.dtable > tbody > tr > td {
+  border-color: color-mix(in oklab, var(--separator) 70%, transparent);
+}
+.dtable > tbody > tr:not(:first-child):not(.row-detail) > td {
+  border-top-width: 1px;
+  border-top-style: solid;
+}
+.dtable td:first-child,
+.dtable th:first-child {
+  padding-left: 1.5rem;
+}
+.dtable td:last-child,
+.dtable th:last-child {
+  padding-right: 1.5rem;
+}
+
+/* Data row: hover tint, and a faint fill while its expandable details are open. */
+.trow {
+  transition: background-color 150ms;
+}
+.trow:hover {
+  background-color: var(--hover);
+}
+.trow:has(details[open]) {
+  background-color: color-mix(in oklab, var(--fill) 40%, transparent);
+}
+.trow-turn:has(details[open]) {
+  background-color: color-mix(in oklab, var(--accent) 6%, transparent);
+}
+
+/* Hidden row shown while the previous row's toggle is open (CSS :has, no JS). */
+tr.row-detail {
+  display: none;
+}
+tr:has(details[open]) + tr.row-detail {
+  display: table-row;
+}
+tr.row-detail > td {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
+/* Totals row: emphasised on a faint fill. */
+.trow-total {
+  font-weight: 600;
+}
+.trow-total > td {
+  background-color: color-mix(in oklab, var(--fill) 40%, transparent);
+}
+
+.trow:hover .hover-link {
+  color: var(--link);
+}
+
+/* Stretched link: the in-app link covers its positioned ancestor (row or list item). */
+.stretched::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.stretched-round::after {
+  border-radius: 14px;
+}
+
+/* Transcript controls move into the open section header. */
+.tx-controls {
+  top: 1rem;
+  right: 1rem;
+}
+.tx:has(details[open]#transcript) .tx-controls {
+  top: 0.375rem;
+  right: 0;
+}
+.tx-summary {
+  margin-bottom: 1rem;
+}
+details[open]#transcript > summary.tx-summary {
+  margin-bottom: 0.75rem;
+  background: transparent;
+  padding: 0.25rem;
+  box-shadow: none;
+}
+details[open][data-turn] > summary:hover {
+  background: transparent;
+}
+details[open][data-turn] > summary .preview {
+  visibility: hidden;
+}
+
+/* --- motion (only when the user hasn't asked for less) --------------------------------------- */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes grow-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-flow > * {
+    animation: rise var(--dur-3) var(--ease-out) both;
+  }
+  .page-flow > :nth-child(2) { animation-delay: 50ms; }
+  .page-flow > :nth-child(3) { animation-delay: 100ms; }
+  .page-flow > :nth-child(4) { animation-delay: 150ms; }
+  .page-flow > :nth-child(5) { animation-delay: 200ms; }
+  .page-flow > :nth-child(6) { animation-delay: 250ms; }
+  .page-flow > :nth-child(n + 7) { animation-delay: 300ms; }
+
+  .stagger > * {
+    animation: rise var(--dur-3) var(--ease-out) both;
+    animation-delay: 80ms;
+  }
+  .stagger > :nth-child(2) { animation-delay: 130ms; }
+  .stagger > :nth-child(3) { animation-delay: 180ms; }
+  .stagger > :nth-child(4) { animation-delay: 230ms; }
+  .stagger > :nth-child(n + 5) { animation-delay: 280ms; }
+
+  .grow-x {
+    transform-origin: left center;
+    animation: grow-x 700ms var(--ease-out) both;
+    animation-delay: 160ms;
+  }
+  .chart .mark {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: grow-y 560ms var(--ease-out) both;
+    animation-delay: calc(140ms + var(--i, 0) * 12ms);
+  }
+  .chart .avg {
+    animation: fade var(--dur-3) ease-out both;
+    animation-delay: 520ms;
+  }
+
+  .press {
+    transition:
+      transform var(--dur-1) var(--ease-out),
+      background-color var(--dur-1) ease,
+      color var(--dur-1) ease,
+      box-shadow var(--dur-2) ease,
+      opacity var(--dur-1) ease;
+  }
+  .press:active {
+    transform: scale(0.98);
+  }
+
+  :root {
+    interpolate-size: allow-keywords;
+  }
+  details.disclosure::details-content {
+    block-size: 0;
+    opacity: 0;
+    overflow-y: clip;
+    transition:
+      block-size var(--dur-2) var(--ease-out),
+      opacity var(--dur-2) ease,
+      content-visibility var(--dur-2) allow-discrete;
+  }
+  details.disclosure[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+
+  .toast {
+    animation: rise var(--dur-2) var(--ease-out) both;
+  }
+
+  .row-detail > td > * {
+    animation: rise var(--dur-2) var(--ease-out) both;
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, var(--fill) 25%, var(--fill-2) 50%, var(--fill) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s linear infinite;
+  }
+
+  .spin {
+    animation: spin 1s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -1,36 +1,41 @@
-"""Welcome to Reflex! This file outlines the steps to create a basic app."""
+"""BIS AI Cost Tracker (Reflex port of the Next.js POC): app, theme and routes."""
 
 import reflex as rx
 
-from rxconfig import config
+from bis_core.sync import load_local_env
+
+from bis_cost_tracker.pages import issues, not_found, overview, people, person, projects, session, sessions, settings, skills, team, teams
+
+# Same variables as the Next app (`.env.local`: LangSmith / GitHub / DB_PATH).
+load_local_env()
+
+TITLE = "BIS AI Cost Tracker"
 
 
-class State(rx.State):
-    """The app state."""
+def _title(section: str | None) -> str:
+    return f"{section} · {TITLE}" if section else TITLE
 
 
-def index() -> rx.Component:
-    # Welcome Page (Index)
-    return rx.container(
-        rx.color_mode.button(position="top-right"),
-        rx.vstack(
-            rx.heading("Welcome to Reflex!", size="9"),
-            rx.text(
-                "Get started by editing ",
-                rx.code(f"{config.app_name}/{config.app_name}.py"),
-                size="5",
-            ),
-            rx.link(
-                rx.button("Check out our docs!"),
-                href="https://reflex.dev/docs/getting-started/introduction/",
-                is_external=True,
-            ),
-            spacing="5",
-            justify="center",
-            min_height="85vh",
-        ),
-    )
+app = rx.App(
+    stylesheets=["/styles.css"],
+    head_components=[
+        rx.el.meta(name="theme-color", media="(prefers-color-scheme: light)", content="#f5f5f7"),
+        rx.el.meta(name="theme-color", media="(prefers-color-scheme: dark)", content="#000000"),
+    ],
+)
 
+DESCRIPTION = "Copilot Chat usage and cost attribution by team, project, issue and PR."
 
-app = rx.App()
-app.add_page(index)
+app.add_page(overview.page, route="/", title=_title(None), description=DESCRIPTION, on_load=overview.OverviewState.load)
+app.add_page(team.page, route="/equipos/[id]", title=_title("Team"), on_load=team.TeamState.load)
+app.add_page(teams.page, route="/equipos", title=_title("Teams"), on_load=teams.TeamsState.load)
+app.add_page(projects.page, route="/proyectos", title=_title("Projects"), on_load=projects.ProjectsState.load)
+app.add_page(person.page, route="/personas/[user]", title=_title("Person"), on_load=person.PersonState.load)
+app.add_page(people.page, route="/personas", title=_title("People"), on_load=people.PeopleState.load)
+app.add_page(session.page, route="/sesiones/[id]", title=_title("Session"), on_load=session.SessionState.load)
+app.add_page(sessions.page, route="/sesiones", title=_title("Sessions"), on_load=sessions.SessionsState.load)
+app.add_page(issues.issues_page, route="/issues", title=_title("Issues"), on_load=issues.IssuesState.load)
+app.add_page(issues.prs_page, route="/prs", title=_title("Pull requests"), on_load=issues.PrsState.load)
+app.add_page(skills.page, route="/skills", title=_title("Skills"), on_load=skills.SkillsState.load)
+app.add_page(settings.page, route="/ajustes", title=_title("Settings"), on_load=settings.SettingsState.load)
+app.add_page(not_found.page, route="404", title=TITLE, on_load=not_found.NotFoundState.load)

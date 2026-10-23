@@ -1,0 +1,1792 @@
+[
+ {
+  "id": "00000000-0000-0000-91c4-a4cc1c3ff57c",
+  "trace_id": "00000000-0000-0000-91c4-a4cc1c3ff57c",
+  "name": "invoke_agent GitHub Copilot Chat",
+  "run_type": "chain",
+  "start_time": "2026-10-21T07:13:12.101Z",
+  "parent_run_ids": [],
+  "inputs": {
+   "messages": [
+    {
+     "content": [
+      {
+       "text": "Resume qué hace src/lib/sync sin modificar nada",
+       "type": "text"
+      }
+     ],
+     "role": "user"
+    }
+   ]
+  },
+  "outputs": {
+   "messages": [
+    {
+     "content": [
+      {
+       "text": "`src/lib/sync` trae datos externos y los guarda en SQLite; la atribución y los cálculos de costes ocurren en otros módulos. `syncLangSmith` obtiene las trazas de Copilot y las convierte en turnos: en una primera ejecución mira hasta 30 días atrás; después retoma desde el último cursor con dos horas de solapamiento para recoger spans tardías. Luego actualiza los turnos y el cursor en la base de datos ([src/lib/sync/langsmith.ts](src/lib/sync/langsmith.ts#L11)).\n\n`syncGitHub` sincroniza issues, PR y commits de los repositorios configurados; desde la app, limita la búsqueda a repositorios que aparecen en turnos reales de LangSmith. Guarda los resultados y mantiene un cursor por repositorio; un error en uno no impide procesar los demás ([src/lib/sync/github.ts](src/lib/sync/github.ts#L34)). `runFullSync` coordina primero LangSmith y luego GitHub, evita ejecuciones simultáneas y persiste un resumen del resultado, incluidos errores ([src/lib/sync/index.ts](src/lib/sync/index.ts#L96), [src/lib/sync/summary.ts](src/lib/sync/summary.ts)).",
+       "type": "text"
+      }
+     ],
+     "role": "assistant"
+    }
+   ]
+  },
+  "extra": {
+   "invocation_params": {
+    "model": "gpt-6-luna",
+    "tools": [
+     {
+      "description": "Edit text files. Do not use this tool to edit Jupyter notebooks. `apply_patch` allows you to execute a diff/patch agains …[fixture-truncated]",
+      "name": "apply_patch",
+      "type": "function"
+     },
+     {
+      "description": "Create a new directory structure in the workspace. Will recursively create all directories in the path, like mkdir -p. Y …[fixture-truncated]",
+      "name": "create_directory",
+      "type": "function"
+     }
+    ]
+   },
+   "metadata": {
+    "OTEL_SPAN_ID": "91c4a4cc1c3ff57c",
+    "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+    "agent_name": "GitHub Copilot Chat",
+    "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "git_branch": "feat/18-full-capture",
+    "git_commit_sha": "58f260cbbdef252d736f5d10b8c539b1687b98d7",
+    "ls_agent_purpose": "coding",
+    "ls_agent_runtime": "GitHub Copilot",
+    "ls_agent_runtime_version": "0.69.0",
+    "ls_agent_type": "root",
+    "ls_integration": "copilot",
+    "ls_model_name": "gpt-6-luna",
+    "ls_provider": "github",
+    "ls_trace_schema_version": "coding-agent-v1",
+    "otel.resource.host.name": "HOST",
+    "otel.resource.process.user.name": "user",
+    "otel.resource.service.name": "copilot-chat",
+    "otel.resource.service.version": "0.69.0",
+    "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+    "otel.resource.team.id": "data",
+    "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.copilot_chat.repo.head_branch_name": "feat/18-full-capture",
+    "otel.span.copilot_chat.repo.head_commit_hash": "58f260cbbdef252d736f5d10b8c539b1687b98d7",
+    "otel.span.copilot_chat.repo.remote_url": "https://github.com/javieravacone/ai-cost-tracker.git",
+    "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.copilot_chat.turn_count": 2,
+    "otel.span.copilot_chat.user_request": "Resume qué hace src/lib/sync sin modificar nada",
+    "otel.span.github.copilot.agent.type": "builtin",
+    "otel.span.github.copilot.git.branch": "feat/18-full-capture",
+    "otel.span.github.copilot.git.commit_sha": "58f260cbbdef252d736f5d10b8c539b1687b98d7",
+    "otel.span.github.copilot.git.repository": "https://github.com/javieravacone/ai-cost-tracker.git",
+    "otel.span.github.copilot.github.org": "javieravacone",
+    "otel.span.user.name": "javieravacone",
+    "repository_name": "javieravacone/ai-cost-tracker",
+    "repository_provider": "github",
+    "repository_url": "https://github.com/javieravacone/ai-cost-tracker.git",
+    "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+   }
+  },
+  "metadata": {
+   "OTEL_SPAN_ID": "91c4a4cc1c3ff57c",
+   "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+   "agent_name": "GitHub Copilot Chat",
+   "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "git_branch": "feat/18-full-capture",
+   "git_commit_sha": "58f260cbbdef252d736f5d10b8c539b1687b98d7",
+   "ls_agent_purpose": "coding",
+   "ls_agent_runtime": "GitHub Copilot",
+   "ls_agent_runtime_version": "0.69.0",
+   "ls_agent_type": "root",
+   "ls_integration": "copilot",
+   "ls_model_name": "gpt-6-luna",
+   "ls_provider": "github",
+   "ls_run_depth": 0,
+   "ls_trace_schema_version": "coding-agent-v1",
+   "otel.resource.host.name": "HOST",
+   "otel.resource.process.user.name": "user",
+   "otel.resource.service.name": "copilot-chat",
+   "otel.resource.service.version": "0.69.0",
+   "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+   "otel.resource.team.id": "data",
+   "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.copilot_chat.repo.head_branch_name": "feat/18-full-capture",
+   "otel.span.copilot_chat.repo.head_commit_hash": "58f260cbbdef252d736f5d10b8c539b1687b98d7",
+   "otel.span.copilot_chat.repo.remote_url": "https://github.com/javieravacone/ai-cost-tracker.git",
+   "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.copilot_chat.turn_count": 2,
+   "otel.span.copilot_chat.user_request": "Resume qué hace src/lib/sync sin modificar nada",
+   "otel.span.github.copilot.agent.type": "builtin",
+   "otel.span.github.copilot.git.branch": "feat/18-full-capture",
+   "otel.span.github.copilot.git.commit_sha": "58f260cbbdef252d736f5d10b8c539b1687b98d7",
+   "otel.span.github.copilot.git.repository": "https://github.com/javieravacone/ai-cost-tracker.git",
+   "otel.span.github.copilot.github.org": "javieravacone",
+   "otel.span.user.name": "javieravacone",
+   "repository_name": "javieravacone/ai-cost-tracker",
+   "repository_provider": "github",
+   "repository_url": "https://github.com/javieravacone/ai-cost-tracker.git",
+   "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+  }
+ },
+ {
+  "id": "00000000-0000-0000-c325-3664f817306d",
+  "trace_id": "00000000-0000-0000-91c4-a4cc1c3ff57c",
+  "name": "manage_todo_list",
+  "run_type": "tool",
+  "start_time": "2026-10-21T07:13:12.152Z",
+  "parent_run_ids": [
+   "00000000-0000-0000-91c4-a4cc1c3ff57c"
+  ],
+  "inputs": {
+   "chatSessionResource": {
+    "$mid": 1,
+    "authority": "local",
+    "external": "vscode-chat-session://local/NWNmMjFjZWYtMDY3OS00NzRhLWI1MTctNDkxNDIyMmYxOTVk",
+    "path": "/NWNmMjFjZWYtMDY3OS00NzRhLWI1MTctNDkxNDIyMmYxOTVk",
+    "scheme": "vscode-chat-session"
+   },
+   "operation": "read"
+  },
+  "outputs": {
+   "result": "No todo list found."
+  },
+  "extra": {
+   "invocation_params": {
+    "tool_description": "Manage a structured todo list to track progress and plan tasks throughout your coding session. Use this tool VERY frequently to ensure task visibility and proper planning.\n\nWhen to use this tool:\n- Complex multi-step work requiring planning and tracking\n- When user provides multiple tasks or requests (numbered/comma-separated)\n- After receiving new instructions that require multiple steps\n- BEFORE starting work on any todo (mark as in-progress)\n- IMMEDIATELY after completing each todo (mark completed individually)\n- When breaking down larger tasks into smaller actionable steps\n- To give users visibility into your progress and planning\n\nWhen NOT to use:\n- Single, trivial tasks that can be completed in one step\n- Purely conversational/informational requests\n- When just reading files or performing simple searches\n\nCRITICAL workflow:\n1. Plan tasks by writing todo list with specific, actionable items\n2. Mark ONE todo as in-progress before starting work\n3. Complete the work for that specific todo\n4. Mark that todo as completed IMMEDIATELY\n5. Move to next todo and repeat\n\nTodo states:\n- not-started: Todo not yet begun\n- in-progress: Currently working (limit ONE at a time)\n- completed: Finished successfully\n\nIMPORTANT: Mark todos completed as soon as they are done. Do not batch completions.",
+    "tool_name": "manage_todo_list"
+   },
+   "metadata": {
+    "OTEL_SPAN_ID": "c3253664f817306d",
+    "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+    "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "ls_agent_purpose": "coding",
+    "ls_agent_runtime": "GitHub Copilot",
+    "ls_agent_runtime_version": "0.69.0",
+    "ls_agent_type": "root",
+    "ls_integration": "copilot",
+    "ls_run_depth": 1,
+    "ls_trace_schema_version": "coding-agent-v1",
+    "otel.resource.host.name": "HOST",
+    "otel.resource.process.user.name": "user",
+    "otel.resource.service.name": "copilot-chat",
+    "otel.resource.service.version": "0.69.0",
+    "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+    "otel.resource.team.id": "data",
+    "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+   }
+  },
+  "metadata": {
+   "OTEL_SPAN_ID": "c3253664f817306d",
+   "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+   "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "ls_agent_purpose": "coding",
+   "ls_agent_runtime": "GitHub Copilot",
+   "ls_agent_runtime_version": "0.69.0",
+   "ls_agent_type": "root",
+   "ls_integration": "copilot",
+   "ls_run_depth": 1,
+   "ls_trace_schema_version": "coding-agent-v1",
+   "otel.resource.host.name": "HOST",
+   "otel.resource.process.user.name": "user",
+   "otel.resource.service.name": "copilot-chat",
+   "otel.resource.service.version": "0.69.0",
+   "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+   "otel.resource.team.id": "data",
+   "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+  }
+ },
+ {
+  "id": "00000000-0000-0000-49d8-25652276bcfd",
+  "trace_id": "00000000-0000-0000-91c4-a4cc1c3ff57c",
+  "name": "chat gpt-6-luna",
+  "run_type": "llm",
+  "start_time": "2026-10-21T07:13:12.219Z",
+  "parent_run_ids": [
+   "00000000-0000-0000-91c4-a4cc1c3ff57c"
+  ],
+  "inputs": {
+   "messages": [
+    {
+     "content": [
+      {
+       "text": "<context>\nThe current date is 2026-10-21.\nTerminals:\nTerminal: zsh\nLast Command: git switch feat/18-full-capture\nCwd: /home/user/code/ai-cost-tracker\nExit Code: 0\n\n</context>\n<reminderInstructions>\nYou are an agent—keep going until the user's query is completely resolved before ending your turn. ONLY stop if solved or genuinely blocked.\nTake action when possible; the user expects you to do useful work without unnecessary questions.\nAfter any parallel, read-only context gathering, give  …[fixture-truncated]",
+       "type": "text"
+      }
+     ],
+     "role": "system"
+    },
+    {
+     "content": [
+      {
+       "text": "Resume qué hace src/lib/sync sin modificar nada",
+       "type": "text"
+      }
+     ],
+     "role": "user"
+    }
+   ]
+  },
+  "outputs": {
+   "messages": [
+    {
+     "content": [
+      {
+       "text": "Voy a recorrer los módulos de `src/lib/sync` y sus llamadas inmediatas para resumir qué sincroniza, cómo lo persiste y qué devuelve, sin tocar archivos.",
+       "type": "text"
+      }
+     ],
+     "role": "assistant",
+     "tool_calls": [
+      {
+       "function": {
+        "arguments": "{\"filePath\":\"/home/user/code/ai-cost-tracker/.github/skills/cost-tracker-guide/SKILL.md\",\"startLine\":1,\"endLine\":180}",
+        "name": "read_file"
+       },
+       "id": "call_OjIfVyx85xb6THhiULMaTjZG",
+       "type": "function"
+      },
+      {
+       "function": {
+        "arguments": "{\"filePath\":\"/home/user/code/ai-cost-tracker/src/lib/sync/index.ts\",\"startLine\":1,\"endLine\":280}",
+        "name": "read_file"
+       },
+       "id": "call_WC9VrnwRXonuYE6dYDi3fJIF",
+       "type": "function"
+      },
+      {
+       "function": {
+        "arguments": "{\"filePath\":\"/home/user/code/ai-cost-tracker/src/lib/sync/github.ts\",\"startLine\":1,\"endLine\":280}",
+        "name": "read_file"
+       },
+       "id": "call_ObpsQP4YNfeWTtJh9Nm4Qamt",
+       "type": "function"
+      },
+      {
+       "function": {
+        "arguments": "{\"filePath\":\"/home/user/code/ai-cost-tracker/src/lib/sync/langsmith.ts\",\"startLine\":1,\"endLine\":280}",
+        "name": "read_file"
+       },
+       "id": "call_YXosUAd7Sz0M0UgxHxgaATi8",
+       "type": "function"
+      },
+      {
+       "function": {
+        "arguments": "{\"filePath\":\"/home/user/code/ai-cost-tracker/src/lib/sync/summary.ts\",\"startLine\":1,\"endLine\":200}",
+        "name": "read_file"
+       },
+       "id": "call_aSkvOXduK5X0uUW2ih7mnEnH",
+       "type": "function"
+      }
+     ]
+    }
+   ],
+   "usage_metadata": {
+    "input_token_details": {
+     "cache_read": 46191
+    },
+    "input_tokens": 46857,
+    "output_token_details": {
+     "reasoning": 48
+    },
+    "output_tokens": 342
+   }
+  },
+  "extra": {
+   "invocation_params": {
+    "max_tokens": 128000,
+    "model": "gpt-6-luna",
+    "tools": [
+     {
+      "description": "Edit text files. Do not use this tool to edit Jupyter notebooks. `apply_patch` allows you to execute a diff/patch agains …[fixture-truncated]",
+      "name": "apply_patch",
+      "type": "function"
+     },
+     {
+      "description": "This is a tool for creating a new file in the workspace. The file will be created with the specified content. The direct …[fixture-truncated]",
+      "name": "create_file",
+      "type": "function"
+     }
+    ]
+   },
+   "metadata": {
+    "OTEL_SPAN_ID": "49d825652276bcfd",
+    "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+    "agent_name": "panel/editAgent",
+    "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "ls_agent_purpose": "coding",
+    "ls_agent_runtime": "GitHub Copilot",
+    "ls_agent_runtime_version": "0.69.0",
+    "ls_agent_type": "root",
+    "ls_integration": "copilot",
+    "ls_model_name": "gpt-6-luna",
+    "ls_provider": "github",
+    "ls_trace_schema_version": "coding-agent-v1",
+    "otel.resource.host.name": "HOST",
+    "otel.resource.process.user.name": "user",
+    "otel.resource.service.name": "copilot-chat",
+    "otel.resource.service.version": "0.69.0",
+    "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+    "otel.resource.team.id": "data",
+    "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.copilot_chat.copilot_usage_nano_aiu": 71608500,
+    "otel.span.copilot_chat.reasoning_content": "[encrypted]",
+    "otel.span.copilot_chat.request.max_prompt_tokens": 872000,
+    "otel.span.copilot_chat.request.options": "{\"reasoning\":{\"effort\":\"medium\"},\"text\":{\"verbosity\":\"low\"},\"truncation\":\"disabled\",\"store\":false,\"stream\":true,\"include\":[\"reasoning.encrypted_content\"]}",
+    "otel.span.copilot_chat.request.shape": "{\"api\":\"responses\",\"inputItemCount\":1,\"inputItemTypes\":[\"message\"],\"hasPreviousResponseId\":true}",
+    "otel.span.copilot_chat.server_request_id": "d77bcadd-b70d-410a-be5e-6816869c6f15",
+    "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.copilot_chat.time_to_first_token": 5238,
+    "otel.span.copilot_chat.user_request": "[{\"type\":\"input_text\",\"text\":\"<context>\\nThe current date is 2026-10-21.\\nTerminals:\\nTerminal: zsh\\nLast Command: git switch feat/18-full-capture\\nCwd: /home/user/code/ai-cost-tracker\\nExit Code: 0\\n\\n</context>\\n<reminderInstructions>\\nYou are an agent—keep going until the user's query is completely resolved before ending your turn. ONLY stop if solved or genuinely blocked.\\nTake action when possible; the user expects you to do useful work without unnecessary questions.\\nAfter any parallel, read-only context gathering, give a concise progress update and what's next.\\nAvoid repetition across turns: don't restate unchanged plans or sections (like the todo list) verbatim; provide delta updates or only the parts that changed.\\nTool batches: You MUST preface each batch with a one-sentence why/what/outcome preamble.\\nProgress cadence: After 3 to 5 tool calls, or when you create/edit > ~3 files in a burst, report progress.\\nRequirements coverage: Read the user's ask in full and think carefully. Do not omit a requirement. If something cannot be done with available tools, note why briefly and propose a viable alternative.\\n\\nIMPORTANT: Before calling any deferred tool that was not previously returned by tool_search, you MUST first use tool_search to load it. Calling a deferred tool without first loading it will fail. Tools returned by tool_search are automatically expanded and immediately available - do not search for them again.\\n\\n</reminderInstructions>\\n<userRequest>\\nResume qué hace src/lib/sync sin modificar nada\\n</userRequest>\\n\"}]",
+    "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+   }
+  },
+  "metadata": {
+   "OTEL_SPAN_ID": "49d825652276bcfd",
+   "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+   "agent_name": "panel/editAgent",
+   "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "ls_agent_purpose": "coding",
+   "ls_agent_runtime": "GitHub Copilot",
+   "ls_agent_runtime_version": "0.69.0",
+   "ls_agent_type": "root",
+   "ls_integration": "copilot",
+   "ls_model_name": "gpt-6-luna",
+   "ls_provider": "github",
+   "ls_run_depth": 1,
+   "ls_trace_schema_version": "coding-agent-v1",
+   "otel.resource.host.name": "HOST",
+   "otel.resource.process.user.name": "user",
+   "otel.resource.service.name": "copilot-chat",
+   "otel.resource.service.version": "0.69.0",
+   "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+   "otel.resource.team.id": "data",
+   "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.copilot_chat.copilot_usage_nano_aiu": 71608500,
+   "otel.span.copilot_chat.reasoning_content": "[encrypted]",
+   "otel.span.copilot_chat.request.max_prompt_tokens": 872000,
+   "otel.span.copilot_chat.request.options": "{\"reasoning\":{\"effort\":\"medium\"},\"text\":{\"verbosity\":\"low\"},\"truncation\":\"disabled\",\"store\":false,\"stream\":true,\"include\":[\"reasoning.encrypted_content\"]}",
+   "otel.span.copilot_chat.request.shape": "{\"api\":\"responses\",\"inputItemCount\":1,\"inputItemTypes\":[\"message\"],\"hasPreviousResponseId\":true}",
+   "otel.span.copilot_chat.server_request_id": "d77bcadd-b70d-410a-be5e-6816869c6f15",
+   "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.copilot_chat.time_to_first_token": 5238,
+   "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+  }
+ },
+ {
+  "id": "00000000-0000-0000-6f03-cef057ffe61b",
+  "trace_id": "00000000-0000-0000-6f03-cef057ffe61b",
+  "name": "vscode.chat.user_perceived_time_to_first_progress",
+  "run_type": "chain",
+  "start_time": "2026-10-21T07:13:19.292Z",
+  "parent_run_ids": [],
+  "inputs": {},
+  "outputs": {},
+  "extra": {
+   "metadata": {
+    "OTEL_SPAN_ID": "6f03cef057ffe61b",
+    "OTEL_TRACE_ID": "22afd43473fa4c0d3787fecdca37d91c",
+    "ls_agent_purpose": "coding",
+    "ls_agent_runtime": "GitHub Copilot",
+    "ls_agent_runtime_version": "0.69.0",
+    "ls_agent_type": "root",
+    "ls_integration": "copilot",
+    "ls_run_depth": 0,
+    "ls_trace_schema_version": "coding-agent-v1",
+    "otel.resource.host.name": "HOST",
+    "otel.resource.process.user.name": "user",
+    "otel.resource.service.name": "copilot-chat",
+    "otel.resource.service.version": "0.69.0",
+    "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+    "otel.resource.team.id": "data",
+    "otel.span.vscode.chat.user_interaction.firstProgressKind": "text",
+    "otel.span.vscode.chat.user_interaction.interactionOrdinal": 3,
+    "otel.span.vscode.chat.user_interaction.rendererId": "639fb340-fd0f-4f58-9b5f-d7eb920e8de3",
+    "otel.span.vscode.chat.user_interaction.requestId": "request_d0887fa9-d5e5-4e57-89ac-aefc9fd890c5",
+    "otel.span.vscode.chat.user_interaction.requestPhase": "followup",
+    "otel.span.vscode.chat.user_interaction.result": "success",
+    "otel.span.vscode.chat.user_interaction.schemaVersion": 1,
+    "otel.span.vscode.chat.user_interaction.timeToFirstProgress": 7292.599999964237,
+    "otel.span.vscode.chat.user_interaction.windowFocused": true,
+    "otel.span.vscode.chat.user_interaction.windowVisible": true
+   }
+  },
+  "metadata": {
+   "OTEL_SPAN_ID": "6f03cef057ffe61b",
+   "OTEL_TRACE_ID": "22afd43473fa4c0d3787fecdca37d91c",
+   "ls_agent_purpose": "coding",
+   "ls_agent_runtime": "GitHub Copilot",
+   "ls_agent_runtime_version": "0.69.0",
+   "ls_agent_type": "root",
+   "ls_integration": "copilot",
+   "ls_run_depth": 0,
+   "ls_trace_schema_version": "coding-agent-v1",
+   "otel.resource.host.name": "HOST",
+   "otel.resource.process.user.name": "user",
+   "otel.resource.service.name": "copilot-chat",
+   "otel.resource.service.version": "0.69.0",
+   "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+   "otel.resource.team.id": "data",
+   "otel.span.vscode.chat.user_interaction.firstProgressKind": "text",
+   "otel.span.vscode.chat.user_interaction.interactionOrdinal": 3,
+   "otel.span.vscode.chat.user_interaction.rendererId": "639fb340-fd0f-4f58-9b5f-d7eb920e8de3",
+   "otel.span.vscode.chat.user_interaction.requestId": "request_d0887fa9-d5e5-4e57-89ac-aefc9fd890c5",
+   "otel.span.vscode.chat.user_interaction.requestPhase": "followup",
+   "otel.span.vscode.chat.user_interaction.result": "success",
+   "otel.span.vscode.chat.user_interaction.schemaVersion": 1,
+   "otel.span.vscode.chat.user_interaction.timeToFirstProgress": 7292.599999964237,
+   "otel.span.vscode.chat.user_interaction.windowFocused": true,
+   "otel.span.vscode.chat.user_interaction.windowVisible": true
+  }
+ },
+ {
+  "id": "00000000-0000-0000-fcfc-939ac6b1b315",
+  "trace_id": "00000000-0000-0000-91c4-a4cc1c3ff57c",
+  "name": "read_file",
+  "run_type": "tool",
+  "start_time": "2026-10-21T07:13:22.096Z",
+  "parent_run_ids": [
+   "00000000-0000-0000-91c4-a4cc1c3ff57c"
+  ],
+  "inputs": {
+   "endLine": 280,
+   "filePath": "/home/user/code/ai-cost-tracker/src/lib/sync/langsmith.ts",
+   "startLine": 1
+  },
+  "outputs": {
+   "node": {
+    "children": [
+     {
+      "children": [
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 100,
+          "references": [
+           {
+            "anchor": {
+             "$mid": 1,
+             "path": "/home/user/code/ai-cost-tracker/src/lib/sync/langsmith.ts",
+             "scheme": "file"
+            },
+            "options": {
+             "isFromTool": true
+            }
+           }
+          ],
+          "text": "// Incremental LangSmith -> SQLite sync of Copilot Chat turns (shared by `npm run sync` and the app).\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 100
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 99,
+          "references": [],
+          "text": "\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 99
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 98,
+          "references": [],
+          "text": "import type { DatabaseSync } from \"node:sqlite\";\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 98
+        },
+        "references": [],
+        "type": 1
+       }
+      ],
+      "ctor": 2,
+      "ctorName": "Mn",
+      "props": {},
+      "references": [],
+      "type": 1
+     }
+    ],
+    "ctor": 2,
+    "ctorName": "cMe",
+    "props": {},
+    "references": [],
+    "type": 1
+   }
+  },
+  "extra": {
+   "invocation_params": {
+    "tool_call_id": "call_YXosUAd7Sz0M0UgxHxgaATi8",
+    "tool_description": "Read the contents of a file.\n\nYou must specify the line range you're interested in. Line numbers are 1-indexed. If the file contents returned are insufficient for your task, you may call this tool again to retrieve more content. Prefer reading larger ranges over doing many small reads. Binary files use startLine/endLine as byte offsets.",
+    "tool_name": "read_file"
+   },
+   "metadata": {
+    "OTEL_SPAN_ID": "fcfc939ac6b1b315",
+    "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+    "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "ls_agent_purpose": "coding",
+    "ls_agent_runtime": "GitHub Copilot",
+    "ls_agent_runtime_version": "0.69.0",
+    "ls_agent_type": "root",
+    "ls_integration": "copilot",
+    "ls_run_depth": 1,
+    "ls_trace_schema_version": "coding-agent-v1",
+    "otel.resource.host.name": "HOST",
+    "otel.resource.process.user.name": "user",
+    "otel.resource.service.name": "copilot-chat",
+    "otel.resource.service.version": "0.69.0",
+    "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+    "otel.resource.team.id": "data",
+    "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.github.copilot.tool.parameters.file_path": "/home/user/code/ai-cost-tracker/src/lib/sync/langsmith.ts",
+    "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+   }
+  },
+  "metadata": {
+   "OTEL_SPAN_ID": "fcfc939ac6b1b315",
+   "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+   "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "ls_agent_purpose": "coding",
+   "ls_agent_runtime": "GitHub Copilot",
+   "ls_agent_runtime_version": "0.69.0",
+   "ls_agent_type": "root",
+   "ls_integration": "copilot",
+   "ls_run_depth": 1,
+   "ls_trace_schema_version": "coding-agent-v1",
+   "otel.resource.host.name": "HOST",
+   "otel.resource.process.user.name": "user",
+   "otel.resource.service.name": "copilot-chat",
+   "otel.resource.service.version": "0.69.0",
+   "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+   "otel.resource.team.id": "data",
+   "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.github.copilot.tool.parameters.file_path": "/home/user/code/ai-cost-tracker/src/lib/sync/langsmith.ts",
+   "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+  }
+ },
+ {
+  "id": "00000000-0000-0000-da78-3aedd6ff7ff9",
+  "trace_id": "00000000-0000-0000-91c4-a4cc1c3ff57c",
+  "name": "read_file",
+  "run_type": "tool",
+  "start_time": "2026-10-21T07:13:22.096Z",
+  "parent_run_ids": [
+   "00000000-0000-0000-91c4-a4cc1c3ff57c"
+  ],
+  "inputs": {
+   "endLine": 180,
+   "filePath": "/home/user/code/ai-cost-tracker/.github/skills/cost-tracker-guide/SKILL.md",
+   "startLine": 1
+  },
+  "outputs": {
+   "node": {
+    "children": [
+     {
+      "children": [
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 28,
+          "references": [
+           {
+            "anchor": {
+             "$mid": 1,
+             "path": "/home/user/code/ai-cost-tracker/.github/skills/cost-tracker-guide/SKILL.md",
+             "scheme": "file"
+            },
+            "options": {
+             "isFromTool": true
+            }
+           }
+          ],
+          "text": "---\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 28
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 27,
+          "references": [],
+          "text": "name: cost-tracker-guide\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 27
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 26,
+          "references": [],
+          "text": "description: Explains how the BIS AI Cost Tracker works (attribution, cost model, sync, data layout) and the conventions to follow when answering questions or changing code in this repository. Use for any question about attribution, AI credits, costs, LangSmith or GitHub sync.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 26
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 25,
+          "references": [],
+          "text": "---\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 25
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 24,
+          "references": [],
+          "text": "\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 24
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 23,
+          "references": [],
+          "text": "# BIS AI Cost Tracker guide\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 23
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 22,
+          "references": [],
+          "text": "\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 22
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 21,
+          "references": [],
+          "text": "## Architecture in one minute\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 21
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 20,
+          "references": [],
+          "text": "- Copilot Chat in VS Code exports OpenTelemetry traces to LangSmith. `src/lib/sync` pulls them into SQLite (`data/app.db`) and also syncs GitHub issues and PRs.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 20
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 19,
+          "references": [],
+          "text": "- A **turn** is one `invoke_agent` span (one user request). Tokens and AI credits live on its child `chat <model>` runs.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 19
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 18,
+          "references": [],
+          "text": "- `src/lib/attribution` assigns each turn to project, team, issue and PR with a confidence level: manual > branch > PR head branch > commit > inferred > project only.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 18
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 17,
+          "references": [],
+          "text": "- `src/lib/cost` computes three views: AI credits (`copilot_usage_nano_aiu / 1e9`, 1 credit = $0.01), API-equivalent cost (tokens x list price) and subscription cost (seat + overage).\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 17
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 16,
+          "references": [],
+          "text": "- `src/lib/report` aggregates rows for the pages in `src/app`.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 16
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 15,
+          "references": [],
+          "text": "\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 15
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 14,
+          "references": [],
+          "text": "## Conventions\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 14
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 13,
+          "references": [],
+          "text": "- Name branches `feat/<issue>-slug` or `fix/<issue>-slug` so cost is attributed to the issue exactly.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 13
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 12,
+          "references": [],
+          "text": "- Never edit `src/lib/types.ts` without updating every consumer.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 12
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 11,
+          "references": [],
+          "text": "- Missing data is `null`, never `0` (for example a turn without credits shows \"no data\").\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 11
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 10,
+          "references": [],
+          "text": "- Next.js 16 with `cacheComponents`: pages read the DB inside `<Suspense>` after `connection()`.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 10
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 9,
+          "references": [],
+          "text": "\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 9
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 8,
+          "references": [],
+          "text": "## How to answer\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 8
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 7,
+          "references": [],
+          "text": "- Cite the file and function you used.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 7
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 6,
+          "references": [],
+          "text": "- Keep answers short: 3 to 6 sentences unless asked for more.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 6
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 5,
+          "references": [],
+          "text": "- Do not run `npm run seed`: it wipes the real synced data.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 5
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 4,
+          "references": [],
+          "text": "\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 4
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 3,
+          "references": [],
+          "text": "## Checks\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 3
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 2,
+          "references": [],
+          "text": "`npx vitest run`, `npx tsc --noEmit`, `npx eslint src scripts`.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 2
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 28,
+          "references": [],
+          "text": "",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 28
+        },
+        "references": [],
+        "type": 1
+       }
+      ],
+      "ctor": 2,
+      "ctorName": "Mn",
+      "props": {},
+      "references": [],
+      "type": 1
+     }
+    ],
+    "ctor": 2,
+    "ctorName": "cMe",
+    "props": {},
+    "references": [],
+    "type": 1
+   }
+  },
+  "extra": {
+   "invocation_params": {
+    "tool_call_id": "call_OjIfVyx85xb6THhiULMaTjZG",
+    "tool_description": "Read the contents of a file.\n\nYou must specify the line range you're interested in. Line numbers are 1-indexed. If the file contents returned are insufficient for your task, you may call this tool again to retrieve more content. Prefer reading larger ranges over doing many small reads. Binary files use startLine/endLine as byte offsets.",
+    "tool_name": "read_file"
+   },
+   "metadata": {
+    "OTEL_SPAN_ID": "da783aedd6ff7ff9",
+    "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+    "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "ls_agent_purpose": "coding",
+    "ls_agent_runtime": "GitHub Copilot",
+    "ls_agent_runtime_version": "0.69.0",
+    "ls_agent_type": "root",
+    "ls_integration": "copilot",
+    "ls_run_depth": 1,
+    "ls_trace_schema_version": "coding-agent-v1",
+    "otel.resource.host.name": "HOST",
+    "otel.resource.process.user.name": "user",
+    "otel.resource.service.name": "copilot-chat",
+    "otel.resource.service.version": "0.69.0",
+    "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+    "otel.resource.team.id": "data",
+    "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.github.copilot.tool.parameters.file_path": "/home/user/code/ai-cost-tracker/.github/skills/cost-tracker-guide/SKILL.md",
+    "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+   }
+  },
+  "metadata": {
+   "OTEL_SPAN_ID": "da783aedd6ff7ff9",
+   "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+   "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "ls_agent_purpose": "coding",
+   "ls_agent_runtime": "GitHub Copilot",
+   "ls_agent_runtime_version": "0.69.0",
+   "ls_agent_type": "root",
+   "ls_integration": "copilot",
+   "ls_run_depth": 1,
+   "ls_trace_schema_version": "coding-agent-v1",
+   "otel.resource.host.name": "HOST",
+   "otel.resource.process.user.name": "user",
+   "otel.resource.service.name": "copilot-chat",
+   "otel.resource.service.version": "0.69.0",
+   "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+   "otel.resource.team.id": "data",
+   "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.github.copilot.tool.parameters.file_path": "/home/user/code/ai-cost-tracker/.github/skills/cost-tracker-guide/SKILL.md",
+   "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+  }
+ },
+ {
+  "id": "00000000-0000-0000-8115-d676b0e6551f",
+  "trace_id": "00000000-0000-0000-91c4-a4cc1c3ff57c",
+  "name": "read_file",
+  "run_type": "tool",
+  "start_time": "2026-10-21T07:13:22.096Z",
+  "parent_run_ids": [
+   "00000000-0000-0000-91c4-a4cc1c3ff57c"
+  ],
+  "inputs": {
+   "endLine": 280,
+   "filePath": "/home/user/code/ai-cost-tracker/src/lib/sync/github.ts",
+   "startLine": 1
+  },
+  "outputs": {
+   "node": {
+    "children": [
+     {
+      "children": [
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 141,
+          "references": [
+           {
+            "anchor": {
+             "$mid": 1,
+             "path": "/home/user/code/ai-cost-tracker/src/lib/sync/github.ts",
+             "scheme": "file"
+            },
+            "options": {
+             "isFromTool": true
+            }
+           }
+          ],
+          "text": "// GitHub issues + PRs sync (shared by `npm run sync:github` and the app) and token resolution.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 141
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 140,
+          "references": [],
+          "text": "\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 140
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 139,
+          "references": [],
+          "text": "import { execFile } from \"node:child_process\";\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 139
+        },
+        "references": [],
+        "type": 1
+       }
+      ],
+      "ctor": 2,
+      "ctorName": "Mn",
+      "props": {},
+      "references": [],
+      "type": 1
+     }
+    ],
+    "ctor": 2,
+    "ctorName": "cMe",
+    "props": {},
+    "references": [],
+    "type": 1
+   }
+  },
+  "extra": {
+   "invocation_params": {
+    "tool_call_id": "call_ObpsQP4YNfeWTtJh9Nm4Qamt",
+    "tool_description": "Read the contents of a file.\n\nYou must specify the line range you're interested in. Line numbers are 1-indexed. If the file contents returned are insufficient for your task, you may call this tool again to retrieve more content. Prefer reading larger ranges over doing many small reads. Binary files use startLine/endLine as byte offsets.",
+    "tool_name": "read_file"
+   },
+   "metadata": {
+    "OTEL_SPAN_ID": "8115d676b0e6551f",
+    "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+    "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "ls_agent_purpose": "coding",
+    "ls_agent_runtime": "GitHub Copilot",
+    "ls_agent_runtime_version": "0.69.0",
+    "ls_agent_type": "root",
+    "ls_integration": "copilot",
+    "ls_run_depth": 1,
+    "ls_trace_schema_version": "coding-agent-v1",
+    "otel.resource.host.name": "HOST",
+    "otel.resource.process.user.name": "user",
+    "otel.resource.service.name": "copilot-chat",
+    "otel.resource.service.version": "0.69.0",
+    "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+    "otel.resource.team.id": "data",
+    "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.github.copilot.tool.parameters.file_path": "/home/user/code/ai-cost-tracker/src/lib/sync/github.ts",
+    "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+   }
+  },
+  "metadata": {
+   "OTEL_SPAN_ID": "8115d676b0e6551f",
+   "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+   "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "ls_agent_purpose": "coding",
+   "ls_agent_runtime": "GitHub Copilot",
+   "ls_agent_runtime_version": "0.69.0",
+   "ls_agent_type": "root",
+   "ls_integration": "copilot",
+   "ls_run_depth": 1,
+   "ls_trace_schema_version": "coding-agent-v1",
+   "otel.resource.host.name": "HOST",
+   "otel.resource.process.user.name": "user",
+   "otel.resource.service.name": "copilot-chat",
+   "otel.resource.service.version": "0.69.0",
+   "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+   "otel.resource.team.id": "data",
+   "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.github.copilot.tool.parameters.file_path": "/home/user/code/ai-cost-tracker/src/lib/sync/github.ts",
+   "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+  }
+ },
+ {
+  "id": "00000000-0000-0000-0a57-f660993a04ab",
+  "trace_id": "00000000-0000-0000-91c4-a4cc1c3ff57c",
+  "name": "read_file",
+  "run_type": "tool",
+  "start_time": "2026-10-21T07:13:22.096Z",
+  "parent_run_ids": [
+   "00000000-0000-0000-91c4-a4cc1c3ff57c"
+  ],
+  "inputs": {
+   "endLine": 200,
+   "filePath": "/home/user/code/ai-cost-tracker/src/lib/sync/summary.ts",
+   "startLine": 1
+  },
+  "outputs": {
+   "node": {
+    "children": [
+     {
+      "children": [
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 80,
+          "references": [
+           {
+            "anchor": {
+             "$mid": 1,
+             "path": "/home/user/code/ai-cost-tracker/src/lib/sync/summary.ts",
+             "scheme": "file"
+            },
+            "options": {
+             "isFromTool": true
+            }
+           }
+          ],
+          "text": "// Shared, client-safe shapes and formatters for the \"Sync\" button (no Node imports here:\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 80
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 79,
+          "references": [],
+          "text": "// the client component imports this module).\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 79
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 78,
+          "references": [],
+          "text": "\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 78
+        },
+        "references": [],
+        "type": 1
+       }
+      ],
+      "ctor": 2,
+      "ctorName": "Mn",
+      "props": {},
+      "references": [],
+      "type": 1
+     }
+    ],
+    "ctor": 2,
+    "ctorName": "cMe",
+    "props": {},
+    "references": [],
+    "type": 1
+   }
+  },
+  "extra": {
+   "invocation_params": {
+    "tool_call_id": "call_aSkvOXduK5X0uUW2ih7mnEnH",
+    "tool_description": "Read the contents of a file.\n\nYou must specify the line range you're interested in. Line numbers are 1-indexed. If the file contents returned are insufficient for your task, you may call this tool again to retrieve more content. Prefer reading larger ranges over doing many small reads. Binary files use startLine/endLine as byte offsets.",
+    "tool_name": "read_file"
+   },
+   "metadata": {
+    "OTEL_SPAN_ID": "0a57f660993a04ab",
+    "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+    "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "ls_agent_purpose": "coding",
+    "ls_agent_runtime": "GitHub Copilot",
+    "ls_agent_runtime_version": "0.69.0",
+    "ls_agent_type": "root",
+    "ls_integration": "copilot",
+    "ls_run_depth": 1,
+    "ls_trace_schema_version": "coding-agent-v1",
+    "otel.resource.host.name": "HOST",
+    "otel.resource.process.user.name": "user",
+    "otel.resource.service.name": "copilot-chat",
+    "otel.resource.service.version": "0.69.0",
+    "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+    "otel.resource.team.id": "data",
+    "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.github.copilot.tool.parameters.file_path": "/home/user/code/ai-cost-tracker/src/lib/sync/summary.ts",
+    "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+   }
+  },
+  "metadata": {
+   "OTEL_SPAN_ID": "0a57f660993a04ab",
+   "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+   "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "ls_agent_purpose": "coding",
+   "ls_agent_runtime": "GitHub Copilot",
+   "ls_agent_runtime_version": "0.69.0",
+   "ls_agent_type": "root",
+   "ls_integration": "copilot",
+   "ls_run_depth": 1,
+   "ls_trace_schema_version": "coding-agent-v1",
+   "otel.resource.host.name": "HOST",
+   "otel.resource.process.user.name": "user",
+   "otel.resource.service.name": "copilot-chat",
+   "otel.resource.service.version": "0.69.0",
+   "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+   "otel.resource.team.id": "data",
+   "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.github.copilot.tool.parameters.file_path": "/home/user/code/ai-cost-tracker/src/lib/sync/summary.ts",
+   "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+  }
+ },
+ {
+  "id": "00000000-0000-0000-0441-ba11be12b8d9",
+  "trace_id": "00000000-0000-0000-91c4-a4cc1c3ff57c",
+  "name": "read_file",
+  "run_type": "tool",
+  "start_time": "2026-10-21T07:13:22.096Z",
+  "parent_run_ids": [
+   "00000000-0000-0000-91c4-a4cc1c3ff57c"
+  ],
+  "inputs": {
+   "endLine": 280,
+   "filePath": "/home/user/code/ai-cost-tracker/src/lib/sync/index.ts",
+   "startLine": 1
+  },
+  "outputs": {
+   "node": {
+    "children": [
+     {
+      "children": [
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 152,
+          "references": [
+           {
+            "anchor": {
+             "$mid": 1,
+             "path": "/home/user/code/ai-cost-tracker/src/lib/sync/index.ts",
+             "scheme": "file"
+            },
+            "options": {
+             "isFromTool": true
+            }
+           }
+          ],
+          "text": "// On-demand sync used by the dashboard's \"Sync\" button and the npm scripts.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 152
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 151,
+          "references": [],
+          "text": "// LangSmith first (turns), then GitHub (issues + PRs of the repos seen in real turns). One\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 151
+        },
+        "references": [],
+        "type": 1
+       },
+       {
+        "children": [
+         {
+          "lineBreakBefore": true,
+          "priority": 150,
+          "references": [],
+          "text": "// failing source does not stop the other; an in-process lock prevents overlapping runs.\n",
+          "type": 2
+         }
+        ],
+        "ctor": 2,
+        "ctorName": "j$e",
+        "props": {
+         "priority": 150
+        },
+        "references": [],
+        "type": 1
+       }
+      ],
+      "ctor": 2,
+      "ctorName": "Mn",
+      "props": {},
+      "references": [],
+      "type": 1
+     }
+    ],
+    "ctor": 2,
+    "ctorName": "cMe",
+    "props": {},
+    "references": [],
+    "type": 1
+   }
+  },
+  "extra": {
+   "invocation_params": {
+    "tool_call_id": "call_WC9VrnwRXonuYE6dYDi3fJIF",
+    "tool_description": "Read the contents of a file.\n\nYou must specify the line range you're interested in. Line numbers are 1-indexed. If the file contents returned are insufficient for your task, you may call this tool again to retrieve more content. Prefer reading larger ranges over doing many small reads. Binary files use startLine/endLine as byte offsets.",
+    "tool_name": "read_file"
+   },
+   "metadata": {
+    "OTEL_SPAN_ID": "0441ba11be12b8d9",
+    "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+    "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "ls_agent_purpose": "coding",
+    "ls_agent_runtime": "GitHub Copilot",
+    "ls_agent_runtime_version": "0.69.0",
+    "ls_agent_type": "root",
+    "ls_integration": "copilot",
+    "ls_run_depth": 1,
+    "ls_trace_schema_version": "coding-agent-v1",
+    "otel.resource.host.name": "HOST",
+    "otel.resource.process.user.name": "user",
+    "otel.resource.service.name": "copilot-chat",
+    "otel.resource.service.version": "0.69.0",
+    "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+    "otel.resource.team.id": "data",
+    "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.github.copilot.tool.parameters.file_path": "/home/user/code/ai-cost-tracker/src/lib/sync/index.ts",
+    "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+   }
+  },
+  "metadata": {
+   "OTEL_SPAN_ID": "0441ba11be12b8d9",
+   "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+   "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "ls_agent_purpose": "coding",
+   "ls_agent_runtime": "GitHub Copilot",
+   "ls_agent_runtime_version": "0.69.0",
+   "ls_agent_type": "root",
+   "ls_integration": "copilot",
+   "ls_run_depth": 1,
+   "ls_trace_schema_version": "coding-agent-v1",
+   "otel.resource.host.name": "HOST",
+   "otel.resource.process.user.name": "user",
+   "otel.resource.service.name": "copilot-chat",
+   "otel.resource.service.version": "0.69.0",
+   "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+   "otel.resource.team.id": "data",
+   "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.github.copilot.tool.parameters.file_path": "/home/user/code/ai-cost-tracker/src/lib/sync/index.ts",
+   "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+  }
+ },
+ {
+  "id": "00000000-0000-0000-ada9-5b3c0048c885",
+  "trace_id": "00000000-0000-0000-91c4-a4cc1c3ff57c",
+  "name": "chat gpt-6-luna",
+  "run_type": "llm",
+  "start_time": "2026-10-21T07:13:22.336Z",
+  "parent_run_ids": [
+   "00000000-0000-0000-91c4-a4cc1c3ff57c"
+  ],
+  "inputs": {
+   "messages": [
+    {
+     "content": "\"---\\nname: cost-tracker-guide\\ndescription: Explains how the BIS AI Cost Tracker works (attribution, cost model, sync, data layout) and the conventions to follow when answering questions or changing code in this repository. Use for any question about attribution, AI credits, costs, LangSmith or GitHub sync.\\n---\\n\\n# BIS AI Cost Tracker guide\\n\\n## Architecture in one minute\\n- Copilot Chat in VS Code exports OpenTelemetry traces to LangSmith. `src/lib/sync` pulls them into SQLite (`data/app.db …[fixture-truncated]",
+     "role": "tool",
+     "tool_call_id": "call_OjIfVyx85xb6THhiULMaTjZG"
+    },
+    {
+     "content": "\"// On-demand sync used by the dashboard's \\\"Sync\\\" button and the npm scripts.\\n// LangSmith first (turns), then GitHub (issues + PRs of the repos seen in real turns). One\\n// failing source does not stop the other; an in-process lock prevents overlapping runs.\\n\\nimport fs from \\\"node:fs\\\";\\nimport path from \\\"node:path\\\";\\nimport type { DatabaseSync } from \\\"node:sqlite\\\";\\n\\nimport { getSyncState, setSyncState } from \\\"../db\\\";\\nimport { LangSmithApiError, LangSmithConfigError, type ClientOp …[fixture-truncated]",
+     "role": "tool",
+     "tool_call_id": "call_WC9VrnwRXonuYE6dYDi3fJIF"
+    },
+    {
+     "content": "\"// GitHub issues + PRs sync (shared by `npm run sync:github` and the app) and token resolution.\\n\\nimport { execFile } from \\\"node:child_process\\\";\\nimport os from \\\"node:os\\\";\\nimport path from \\\"node:path\\\";\\nimport type { DatabaseSync } from \\\"node:sqlite\\\";\\n\\nimport { normalizeRepo } from \\\"../attribution\\\";\\nimport { getSyncState, listRepoMappings, listTurns, setSyncState, upsertIssues, upsertPullRequests } from \\\"../db\\\";\\nimport { getGitHubConfig, GitHubApiError, GitHubClient, type Repo …[fixture-truncated]",
+     "role": "tool",
+     "tool_call_id": "call_ObpsQP4YNfeWTtJh9Nm4Qamt"
+    },
+    {
+     "content": "\"// Incremental LangSmith -\\u003e SQLite sync of Copilot Chat turns (shared by `npm run sync` and the app).\\n\\nimport type { DatabaseSync } from \\\"node:sqlite\\\";\\n\\nimport { getSyncState, getTurn, setSyncState, upsertTurns } from \\\"../db\\\";\\nimport { getLangSmithConfig, LangSmithClient, type ClientOptions } from \\\"../langsmith/client\\\";\\nimport { mapRunsToTurns, type LangSmithRun } from \\\"../langsmith/map\\\";\\n\\nexport const LANGSMITH_STATE_KEY = \\\"langsmith.lastStartTime\\\";\\nexport const DEFAULT …[fixture-truncated]",
+     "role": "tool",
+     "tool_call_id": "call_YXosUAd7Sz0M0UgxHxgaATi8"
+    },
+    {
+     "content": "\"// Shared, client-safe shapes and formatters for the \\\"Sync\\\" button (no Node imports here:\\n// the client component imports this module).\\n\\n/** Persisted in sync_state under `app.lastSync` after every full sync. */\\nexport interface SyncSummary {\\n  /** ISO time the sync finished. */\\n  at: string;\\n  /** true when no source reported an error. */\\n  ok: boolean;\\n  newTurns: number;\\n  turns: number;\\n  issues: number;\\n  pullRequests: number;\\n  /** Short user-facing messages, never secrets. …[fixture-truncated]",
+     "role": "tool",
+     "tool_call_id": "call_aSkvOXduK5X0uUW2ih7mnEnH"
+    }
+   ]
+  },
+  "outputs": {
+   "messages": [
+    {
+     "content": [
+      {
+       "text": "`src/lib/sync` trae datos externos y los guarda en SQLite; la atribución y los cálculos de costes ocurren en otros módulos. `syncLangSmith` obtiene las trazas de Copilot y las convierte en turnos: en una primera ejecución mira hasta 30 días atrás; después retoma desde el último cursor con dos horas de solapamiento para recoger spans tardías. Luego actualiza los turnos y el cursor en la base de datos ([src/lib/sync/langsmith.ts](src/lib/sync/langsmith.ts#L11)).\n\n`syncGitHub` sincroniza issues, PR y commits de los repositorios configurados; desde la app, limita la búsqueda a repositorios que aparecen en turnos reales de LangSmith. Guarda los resultados y mantiene un cursor por repositorio; un error en uno no impide procesar los demás ([src/lib/sync/github.ts](src/lib/sync/github.ts#L34)). `runFullSync` coordina primero LangSmith y luego GitHub, evita ejecuciones simultáneas y persiste un resumen del resultado, incluidos errores ([src/lib/sync/index.ts](src/lib/sync/index.ts#L96), [src/lib/sync/summary.ts](src/lib/sync/summary.ts)).",
+       "type": "text"
+      }
+     ],
+     "role": "assistant"
+    }
+   ],
+   "usage_metadata": {
+    "input_token_details": {
+     "cache_read": 46854
+    },
+    "input_tokens": 52245,
+    "output_token_details": {
+     "reasoning": 296
+    },
+    "output_tokens": 562
+   }
+  },
+  "extra": {
+   "invocation_params": {
+    "max_tokens": 128000,
+    "model": "gpt-6-luna",
+    "tools": [
+     {
+      "description": "Edit text files. Do not use this tool to edit Jupyter notebooks. `apply_patch` allows you to execute a diff/patch agains …[fixture-truncated]",
+      "name": "apply_patch",
+      "type": "function"
+     },
+     {
+      "description": "This is a tool for creating a new file in the workspace. The file will be created with the specified content. The direct …[fixture-truncated]",
+      "name": "create_file",
+      "type": "function"
+     }
+    ]
+   },
+   "metadata": {
+    "OTEL_SPAN_ID": "ada95b3c0048c885",
+    "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+    "agent_name": "panel/editAgent",
+    "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "ls_agent_purpose": "coding",
+    "ls_agent_runtime": "GitHub Copilot",
+    "ls_agent_runtime_version": "0.69.0",
+    "ls_agent_type": "root",
+    "ls_integration": "copilot",
+    "ls_model_name": "gpt-6-luna",
+    "ls_provider": "github",
+    "ls_trace_schema_version": "coding-agent-v1",
+    "otel.resource.host.name": "HOST",
+    "otel.resource.process.user.name": "user",
+    "otel.resource.service.name": "copilot-chat",
+    "otel.resource.service.version": "0.69.0",
+    "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+    "otel.resource.team.id": "data",
+    "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.copilot_chat.copilot_usage_nano_aiu": 142334000,
+    "otel.span.copilot_chat.reasoning_content": "[encrypted]",
+    "otel.span.copilot_chat.request.max_prompt_tokens": 872000,
+    "otel.span.copilot_chat.request.options": "{\"reasoning\":{\"effort\":\"medium\"},\"text\":{\"verbosity\":\"low\"},\"truncation\":\"disabled\",\"store\":false,\"stream\":true,\"include\":[\"reasoning.encrypted_content\"]}",
+    "otel.span.copilot_chat.request.shape": "{\"api\":\"responses\",\"inputItemCount\":5,\"inputItemTypes\":[\"function_call_output\",\"function_call_output\",\"function_call_output\",\"function_call_output\",\"function_call_output\"],\"hasPreviousResponseId\":true}",
+    "otel.span.copilot_chat.server_request_id": "d77bcadd-b70d-410a-be5e-6816869c6f15",
+    "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+    "otel.span.copilot_chat.time_to_first_token": 5385,
+    "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+   }
+  },
+  "metadata": {
+   "OTEL_SPAN_ID": "ada95b3c0048c885",
+   "OTEL_TRACE_ID": "1810492b117d622a8394ed1579379fd7",
+   "agent_name": "panel/editAgent",
+   "conversation_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "ls_agent_purpose": "coding",
+   "ls_agent_runtime": "GitHub Copilot",
+   "ls_agent_runtime_version": "0.69.0",
+   "ls_agent_type": "root",
+   "ls_integration": "copilot",
+   "ls_model_name": "gpt-6-luna",
+   "ls_provider": "github",
+   "ls_run_depth": 1,
+   "ls_trace_schema_version": "coding-agent-v1",
+   "otel.resource.host.name": "HOST",
+   "otel.resource.process.user.name": "user",
+   "otel.resource.service.name": "copilot-chat",
+   "otel.resource.service.version": "0.69.0",
+   "otel.resource.session.id": "3da57d41-8ed9-4e08-b8a2-46154e984e4a1792566590757",
+   "otel.resource.team.id": "data",
+   "otel.span.copilot_chat.chat_session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.copilot_chat.copilot_usage_nano_aiu": 142334000,
+   "otel.span.copilot_chat.reasoning_content": "[encrypted]",
+   "otel.span.copilot_chat.request.max_prompt_tokens": 872000,
+   "otel.span.copilot_chat.request.options": "{\"reasoning\":{\"effort\":\"medium\"},\"text\":{\"verbosity\":\"low\"},\"truncation\":\"disabled\",\"store\":false,\"stream\":true,\"include\":[\"reasoning.encrypted_content\"]}",
+   "otel.span.copilot_chat.request.shape": "{\"api\":\"responses\",\"inputItemCount\":5,\"inputItemTypes\":[\"function_call_output\",\"function_call_output\",\"function_call_output\",\"function_call_output\",\"function_call_output\"],\"hasPreviousResponseId\":true}",
+   "otel.span.copilot_chat.server_request_id": "d77bcadd-b70d-410a-be5e-6816869c6f15",
+   "otel.span.copilot_chat.session_id": "5cf21cef-0679-474a-b517-4914222f195d",
+   "otel.span.copilot_chat.time_to_first_token": 5385,
+   "thread_id": "5cf21cef-0679-474a-b517-4914222f195d"
+  }
+ }
+]
