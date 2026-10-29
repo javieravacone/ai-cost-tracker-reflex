@@ -10,3 +10,5 @@ assets/external/
 data/
 .env*
 !.env.example
+# company-specific reference data (see reference.example.json)
+reference.json

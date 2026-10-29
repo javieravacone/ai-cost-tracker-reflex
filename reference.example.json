@@ -1,0 +1,50 @@
+{
+  "_comment": "Copy to reference.json (git-ignored) and edit, then run: python scripts/load_reference.py --dry-run. Entries here OVERWRITE existing rows; nothing is ever deleted. A section left out falls back to the script's built-in defaults (insert-only). Keys starting with '_' are ignored. Prices are illustrative list prices: check your GitHub contract and https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing",
+
+  "_default_seat_plan": "Seat plan for members derived from real turns (and config members without seat_plan_id).",
+  "default_seat_plan": "copilot-business",
+
+  "_default_team": "Team for members whose turns carry no team_id (or more than one).",
+  "default_team": "unassigned",
+
+  "_seat_plans": "Subscription cost per seat and month. included_ai_credits = monthly AI credit pool per seat; included_premium_requests / overage_per_premium_request_usd = legacy premium-request model.",
+  "seat_plans": [
+    { "id": "copilot-business", "name": "Copilot Business", "monthly_price_usd": 19, "included_premium_requests": 300, "overage_per_premium_request_usd": 0.04, "included_ai_credits": 1900 },
+    { "id": "copilot-enterprise", "name": "Copilot Enterprise", "monthly_price_usd": 39, "included_premium_requests": 1000, "overage_per_premium_request_usd": 0.04, "included_ai_credits": 3900 },
+    { "id": "copilot-pro", "name": "Copilot Pro", "monthly_price_usd": 10, "included_premium_requests": 300, "overage_per_premium_request_usd": 0.04, "included_ai_credits": 1500 },
+    { "id": "copilot-free", "name": "Copilot Free", "monthly_price_usd": 0, "included_premium_requests": 50, "overage_per_premium_request_usd": 0, "included_ai_credits": 0 }
+  ],
+
+  "_model_prices": "USD per 1M tokens (API-equivalent cost) + legacy premium multiplier. A model ending in '*' is a prefix: exact match wins, else the longest prefix.",
+  "model_prices": [
+    { "model": "gpt-4.1", "input_per_mtok": 2, "output_per_mtok": 8, "cache_read_per_mtok": 0.5, "cache_write_per_mtok": 0, "premium_multiplier": 0 },
+    { "model": "gpt-5-mini", "input_per_mtok": 0.25, "output_per_mtok": 2, "cache_read_per_mtok": 0.025, "cache_write_per_mtok": 0, "premium_multiplier": 0 },
+    { "model": "gpt-5*", "input_per_mtok": 1.25, "output_per_mtok": 10, "cache_read_per_mtok": 0.125, "cache_write_per_mtok": 0, "premium_multiplier": 1 },
+    { "model": "claude-sonnet-4*", "input_per_mtok": 3, "output_per_mtok": 15, "cache_read_per_mtok": 0.3, "cache_write_per_mtok": 3.75, "premium_multiplier": 1 },
+    { "model": "claude-opus-4*", "input_per_mtok": 15, "output_per_mtok": 75, "cache_read_per_mtok": 1.5, "cache_write_per_mtok": 18.75, "premium_multiplier": 10 },
+    { "model": "gemini-2.5-pro", "input_per_mtok": 1.25, "output_per_mtok": 10, "cache_read_per_mtok": 0.31, "cache_write_per_mtok": 0, "premium_multiplier": 1 },
+    { "model": "gpt-6-luna", "input_per_mtok": 0.1, "output_per_mtok": 0.5, "cache_read_per_mtok": 0.01, "cache_write_per_mtok": 0.125, "premium_multiplier": 0 },
+    { "model": "gpt-6*", "input_per_mtok": 0.1, "output_per_mtok": 0.5, "cache_read_per_mtok": 0.01, "cache_write_per_mtok": 0.125, "premium_multiplier": 0 }
+  ],
+
+  "_teams": "Display names for team ids (team_id comes from the Copilot resource attribute in LangSmith).",
+  "teams": [
+    { "id": "data", "name": "Data Engineering" },
+    { "id": "unassigned", "name": "Unassigned" }
+  ],
+
+  "_projects": "Projects; repos are attached to them through repo_mappings.",
+  "projects": [
+    { "id": "cost-tracker", "name": "AI Cost Tracker" }
+  ],
+
+  "_repo_mappings": "repo may be 'owner/name' or any remote URL (normalized to lowercase owner/name; Azure DevOps -> org/repo).",
+  "repo_mappings": [
+    { "repo": "https://github.com/my-org/ai-cost-tracker.git", "project_id": "cost-tracker" }
+  ],
+
+  "_members": "user_name must match the user name in LangSmith turns. Omitted fields keep the stored value (or the defaults above).",
+  "members": [
+    { "user_name": "jane.doe", "display_name": "Jane Doe", "team_id": "data", "seat_plan_id": "copilot-enterprise" }
+  ]
+}
